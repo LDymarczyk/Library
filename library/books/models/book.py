@@ -1,6 +1,7 @@
 from django.db import models
 from .author import Author
 from .user import User
+from .library import Library
 
 
 class Book(models.Model):
@@ -16,3 +17,4 @@ class Book(models.Model):
     language = models.CharField(max_lenght=100)
     status = models.BooleanField()
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
+    library = models.ForeignKey(Library)
