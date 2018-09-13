@@ -1,0 +1,11 @@
+from os import chdir
+
+from rest_framework import serializers
+chdir('../models')
+from .author import Author
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = (first_name, last_name, birth_year, death_year)
