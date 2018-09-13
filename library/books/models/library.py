@@ -1,11 +1,14 @@
 from django.db import models
-from .user import User
+from .user import Reader
 
 
 class Library(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
-    creator = models.ForeignKey(User, editable=False)
-    address = models.CharField(max_lenght=200)
+    creator = models.ForeignKey(Reader, editable=False, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200)
     telephone = models.IntegerField()
-    email = models.CharField(max_lenght=100)
-    name = models.CharField(max_lenght=100)
+    email = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        app_label = 'books'
