@@ -1,4 +1,6 @@
 from rest_framework import serializers
+import sys
+sys.path.append('/..')
 from ..models.author import Author
 
 
