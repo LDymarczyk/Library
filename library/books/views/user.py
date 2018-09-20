@@ -12,8 +12,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = Reader.objects.all()
     serializer_class = UserSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('title', 'author', 'ISBN', 'genre')
-    ordering_fields = ('title', 'publication_date')
+    search_fields = ('PESEL', 'first_name', 'last_name')
+    ordering_fields = ('first_name', 'last_name')
 
 
     def perform_create(self, serializer):
