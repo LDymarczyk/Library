@@ -11,11 +11,13 @@ from .views.book_details import BookDetail
 from .views.library_details import LibraryDetail
 from .views.rent_details import RentDetail
 from .views.user_details import UserDetail
+from .views.author_filter import AuthorFilter
 
 
 urlpatterns = [
     url(r'^$', api_root),
     path('authors/', AuthorList.as_view(), name='authors-list'),
+    url('^authors/(?P<first_name>.+)/$', AuthorFilter.as_view()),
     path('books/', BookList.as_view(), name='books-list'),
     path('libraries/', LibraryList.as_view(), name='libraries-list'),
     path('rents/', RentList.as_view(), name='rents-list'),
