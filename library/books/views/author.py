@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
+from rest_framework import filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -12,8 +14,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-    #                       IsOwnerOrReadOnly,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('first_name', 'last_name')
+    ordering_fields = ('last_name', 'birth_date')
+    #permission_classes = (IsAuthenticatedOrReadOnly,)
 
     # @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     # def highlight(self, request, *args, **kwargs):
