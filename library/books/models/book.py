@@ -20,15 +20,22 @@ class Book(models.Model):
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, default='FS')
     edition = models.IntegerField()
     amount = models.IntegerField()
-    publication_date = models.DateField()
+    publication_date = models.PositiveIntegerField()
     publishing_house = models.CharField(max_length=100)
     language = models.CharField(max_length=100)
     status = models.BooleanField()
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return '{} {}'.format(self.book, self.author)
+    def save(self, *args, **kwargs):
+        if not self._state.adding and (
+                self.creator != self.creator['creator']):
+            raise ValueError("Updating the value of creator isn't allowed")
+        super().save(*args, **kwargs)
 
-    class Meta:
-        app_label = 'books'
+
+    def __str__(self):
+        return '{} {}'.format(self.title, self.id)
+
+    #def rent(self):
+

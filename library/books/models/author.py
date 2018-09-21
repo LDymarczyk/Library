@@ -1,6 +1,7 @@
 from django.db import models
 from .user import Reader
 
+
 class Author(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False, null=True, blank=True)
     creator = models.ForeignKey('Reader', on_delete=models.SET_NULL, editable=False, null=True, blank=True)
@@ -10,7 +11,11 @@ class Author(models.Model):
     death_year = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return '{} {}'.format(self.first_name,self.last_name)
+        return '{} {}'.format(self.first_name, self.last_name)
+
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
 
 
     def create(self, validated_data):

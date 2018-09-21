@@ -17,5 +17,5 @@ class Rent(models.Model):
         self.rent_id = self.id + 10000
 
     class Meta:
-        app_label = 'books'
+        order_with_respect_to = 'reader'
 

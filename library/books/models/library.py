@@ -10,5 +10,5 @@ class Library(models.Model):
     email = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
 
-    class Meta:
-        app_label = 'books'
+    def __str__(self):
+        return '{}'.format(self.name)
