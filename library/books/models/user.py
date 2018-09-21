@@ -8,5 +8,5 @@ class Reader(AbstractUser):
     birth_date = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
 
-    class Meta:
-        app_label = 'books'
+    def __str__(self):
+        return '{} {}'.format(self.PESEL, self.first_name, self.last_name)

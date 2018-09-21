@@ -9,8 +9,9 @@ class Author(models.Model):
     birth_year = models.IntegerField(null=True, blank=True)
     death_year = models.IntegerField(null=True, blank=True)
 
-    class Meta:
-        app_label = 'books'
+    def __str__(self):
+        return '{} {}'.format(self.first_name,self.last_name)
+
 
     def create(self, validated_data):
         return Author.object.create(**validated_data)
