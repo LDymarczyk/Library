@@ -11,27 +11,27 @@ GENRE_CHOICES = (
     ('CM', "Comedy"),
 )
 
+PUBL_HOUSE = (
+    ('FS', 'Fabryka Słów'),
+    ('AL', 'Albatros'),
+    ('MA', 'MAG')
+)
+
 
 class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
-    creator = models.ForeignKey(Reader, editable=False, on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey(Reader, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
-    ISBN = models.IntegerField()
+    ISBN = models.PositiveIntegerField()
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, default='FS')
-    edition = models.IntegerField()
-    amount = models.IntegerField()
+    edition = models.PositiveIntegerField()
+    amount = models.PositiveIntegerField()
     publication_date = models.PositiveIntegerField()
     publishing_house = models.CharField(max_length=100)
     language = models.CharField(max_length=100)
     status = models.BooleanField()
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self._state.adding and (
-                self.creator != self.creator['creator']):
-            raise ValueError("Updating the value of creator isn't allowed")
-        super().save(*args, **kwargs)
 
 
     def __str__(self):

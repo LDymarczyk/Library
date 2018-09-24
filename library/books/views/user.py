@@ -16,6 +16,3 @@ class UserViewSet(viewsets.ModelViewSet):
     ordering_fields = ('first_name', 'last_name')
 
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-

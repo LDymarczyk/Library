@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from ..models.book import Book
 from ..serializers.book import BookSerializer
 from rest_framework import filters
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -17,5 +19,12 @@ class BookViewSet(viewsets.ModelViewSet):
 
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(creator=self.request.user)
+    #
+    # def create(self, request, *args, **kwargs):
+    #     serializer = BookSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save(creator=self.request.user)
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

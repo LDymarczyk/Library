@@ -17,5 +17,5 @@ class RentViewSet(viewsets.ModelViewSet):
 
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(creator=self.request.user)
 
