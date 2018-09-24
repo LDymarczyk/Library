@@ -2,8 +2,16 @@ from rest_framework import viewsets
 from ..models.book import Book
 from ..serializers.book import BookSerializer
 from rest_framework import filters
-from rest_framework.response import Response
-from rest_framework import status
+from django_filters import rest_framework as dfilters
+
+
+class BookFilter(dfilters.FilterSet):
+    min_year=dfilters.NumberFilter(field_name="publication_date", lookup_expr='gte')
+    max_year=dfilters.NumberFilter(field_name="publication_date", lookup_expr='lte')
+
+    class Meta:
+        model = Book
+        fields = ['min_year', 'max_year', 'author']
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -13,18 +21,11 @@ class BookViewSet(viewsets.ModelViewSet):
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('title', 'author', 'ISBN', 'genre')
+    filter_backends = (dfilters.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = ('title', 'publication_date')
+    filterset_class = BookFilter
 
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
-    #
-    # def create(self, request, *args, **kwargs):
-    #     serializer = BookSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save(creator=self.request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Value
+from django.db.models.functions import Concat
 from .user import Reader
 
 
@@ -12,6 +14,11 @@ class Author(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
+
+    @staticmethod
+    def add_fullname(queryset):
+        queryset = queryset.annotate(fullname=Concat('first_name', Value(' '), "last_name"))
+        return queryset
 
     @property
     def full_name(self):
