@@ -33,9 +33,10 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True)
 
-
     def __str__(self):
         return '{} {}'.format(self.title, self.id)
 
-    #def rent(self):
+    #def
+
+
 

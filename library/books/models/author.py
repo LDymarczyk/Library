@@ -20,11 +20,6 @@ class Author(models.Model):
         queryset = queryset.annotate(fullname=Concat('first_name', Value(' '), "last_name"))
         return queryset
 
-    @property
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
-
-
     def create(self, validated_data):
         return Author.object.create(**validated_data)
 

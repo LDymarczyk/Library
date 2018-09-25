@@ -9,13 +9,11 @@ class Rent(models.Model):
     start_date = models.DateField(auto_now_add=True, editable=False)
     end_date = models.DateField()
     reader = models.ForeignKey(Reader,related_name='rent_reader', on_delete=models.PROTECT)
-    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='book_to_rent')
     library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True) #?
-    rent_id = models.IntegerField(default=0)
 
     def custom_id(self):
-        self.rent_id = self.id + 10000
+        self.id += 10000
 
     class Meta:
         order_with_respect_to = 'reader'
-
