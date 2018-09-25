@@ -15,7 +15,6 @@ class RentViewSet(viewsets.ModelViewSet):
     search_fields = ('book', 'reader', 'rent_id')
     ordering_fields = ('rent_id', 'book')
 
-
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
