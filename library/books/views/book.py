@@ -1,10 +1,8 @@
 from rest_framework import viewsets
 from ..models.book import Book
-from ..models.library import Library
 from ..models.user import Reader
 from ..models.rent import Rent
 from ..serializers.book import BookSerializer
-from ..serializers.rent import RentSerializer
 from rest_framework import filters
 from django_filters import rest_framework as dfilters
 from rest_framework.decorators import action
