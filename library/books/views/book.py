@@ -1,14 +1,10 @@
 from rest_framework import viewsets
 from ..models.book import Book
-from ..models.user import Reader
-from ..models.rent import Rent
 from ..serializers.book import BookSerializer
 from rest_framework import filters
 from django_filters import rest_framework as dfilters
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from datetime import date, timedelta
 
 
 class BookFilter(dfilters.FilterSet):
@@ -35,23 +31,11 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer.save(creator=self.request.user)
 
     @action(methods=['get'], detail=False)
-    def show_avaible_books(self, request):
+    def show_available_books(self, request):
         books = list(Book.objects.all())
         books = [book for book in books if book.status]
         serializer = self.get_serializer_class()
         data = serializer(books, many=True, context={"request": request}).data
         return Response(data)
 
-    @action(methods=['post'], detail=True)
-    def rent_book(self, request, pk):
-        import pdb;pdb.set_trace()
-        book = get_object_or_404(Book, pk=pk)
-        if book.status:
-            data = request.data
-            user_pk = data['user']
-            user = Reader.objects.get(id=user_pk)
-            today = date.today() + timedelta(days = 7)
-            Rent.objects.create(reader=user, book=book, end_date=today)
-        else:
-            raise ValueError('The book is already rented')
 
