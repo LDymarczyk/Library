@@ -2,10 +2,12 @@ from rest_framework import viewsets
 from ..models.rent import Rent
 from ..models.book import Book
 from ..serializers.rent import RentSerializer
-from rest_framework import filters
+from rest_framework import filters, status
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from datetime import date, datetime, timedelta
+from rest_framework.response import Response
+from django.http import Http404
 
 
 class RentViewSet(viewsets.ModelViewSet):
@@ -33,8 +35,29 @@ class RentViewSet(viewsets.ModelViewSet):
             end_date = start_date + timedelta(days=14)
         else:
             end_date = self.request.data['end_date']
-        book.amount -= 1
+        book.rent_book()
         serializer.save(creator=self.request.user, end_date=end_date, start_date=start_date)
 
+    def destroy(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        try:
+            instance = self.get_object()
+            print(instance)
+            self.perform_destroy(instance)
+        except Http404:
+            pass
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def perform_destroy(self, instance):
+        # import pdb
+        # print ('1')
+        # pdb.set_trace()
+        instance.delete()
+
+
+
+    # def perform_destroy(self, instance):
+    #     import pdb;
+    #     pdb.set_trace()
+    #     pass
 

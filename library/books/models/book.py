@@ -36,6 +36,19 @@ class Book(models.Model):
     def __str__(self):
         return '{} {}'.format(self.title, self.id)
 
+    def rent_book(self):
+        self.amount -= 1
+        if self.amount == 0:
+            self.status = False
+
+    def return_book(self):
+        self.amount +=1
+        if self.amount > 0:
+            self.status = True
+
+    def is_rented(self):
+        return self.status
+
 
 
 
