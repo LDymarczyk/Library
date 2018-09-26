@@ -1,16 +1,24 @@
 from rest_framework import serializers
 from ..models.book import Book
+from rest_framework.exceptions import ValidationError
+
 
 
 class BookSerializer(serializers.ModelSerializer):
 
     def validate_title(self, title):
+        if len(title)>100:
+            raise ValidationError("Title must have maximum 100 characters.")
         return title
 
     def validate_ISBN(self, ISBN):
+        if len(str(ISBN))not in (10, 13):
+            raise ValidationError("ISBN number must have exactly 10 or 13 digits.")
         return ISBN
 
     def validate_publication_date(self, publication_date):
+        if publication_date<1450:
+            raise ValidationError("Publication date must be greater than 1450. Printing was invented in 1450.")
         return publication_date
 
     class Meta:
