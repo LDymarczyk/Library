@@ -6,6 +6,13 @@ from rest_framework.exceptions import ValidationError
 
 class BookSerializer(serializers.ModelSerializer):
 
+    def validate(self, attrs):
+        amount = attrs.get("amount")
+        status = attrs.get("status")
+        if amount==0 and status==True:
+            raise ValidationError("Status of book can't be True if there are no books.")
+        return attrs
+
     def validate_title(self, title):
         if len(title)>100:
             raise ValidationError("Title must have maximum 100 characters.")
