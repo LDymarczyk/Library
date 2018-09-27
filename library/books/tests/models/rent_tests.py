@@ -13,3 +13,13 @@ class RentModelTests(TestCase):
         book = Book(id = 1)
         rent = Rent(book = book)
         self.assertEqual(rent.get_book().id,1)
+
+    def test_make_rent(self):
+        rent = Rent()
+        rent.make_rent()
+        self.assertTrue(rent.status)
+
+    def test_return_book(self):
+        rent = Rent()
+        rent.return_book()
+        self.assertFalse(rent.status)
