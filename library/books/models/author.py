@@ -20,10 +20,17 @@ class Author(models.Model):
         queryset = queryset.annotate(fullname=Concat('first_name', Value(' '), "last_name"))
         return queryset
 
-    def create(self, validated_data):
-        return Author.object.create(**validated_data)
+    def get_birth_year(self):
+        return self.birth_year
 
-    def update(self, instance, validated_data):
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.birth_year = validated_data.get('birth_year', instance.birth_year)
+    def get_death_year(self):
+        return self.death_year
+
+    def get_first_name(self):
+        return self.first_name
+
+    def get_last_name(self):
+        return self.last_name
+
+    def get_full_name(self):
+        return self.first_name+" "+self.last_name

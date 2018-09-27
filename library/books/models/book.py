@@ -46,6 +46,9 @@ class Book(models.Model):
         if self.amount > 0:
             self.status = True
 
+    def add_more_books(self, amount):
+        self.amount += amount
+
     def is_rented(self):
         return self.status
 
