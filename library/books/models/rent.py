@@ -15,5 +15,8 @@ class Rent(models.Model):
     def custom_id(self):
         self.id += 10000
 
+    def get_book(self):
+        return self.book
+
     class Meta:
         order_with_respect_to = 'reader'

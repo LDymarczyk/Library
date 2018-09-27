@@ -40,24 +40,14 @@ class RentViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         import pdb; pdb.set_trace()
-        try:
-            instance = self.get_object()
-            print(instance)
-            self.perform_destroy(instance)
-        except Http404:
-            pass
+        #try:
+        instance = self.get_object()
+        instance.get_book().return_book()
+        self.perform_destroy(instance)
+        #except Http404:
+            #pass
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_destroy(self, instance):
-        # import pdb
-        # print ('1')
-        # pdb.set_trace()
         instance.delete()
-
-
-
-    # def perform_destroy(self, instance):
-    #     import pdb;
-    #     pdb.set_trace()
-    #     pass
-
+        pass

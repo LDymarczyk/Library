@@ -16,7 +16,7 @@ class RentSerializer(serializers.ModelSerializer):
 
     def validate_book(self, book):
         try:
-            books = get_object_or_404(Book, id=book)
+            get_object_or_404(Book, id=book)
         except:
             raise ValidationError("Book doesn't exist in base.")
         return book
