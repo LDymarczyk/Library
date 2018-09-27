@@ -6,11 +6,11 @@ from rest_framework.exceptions import ValidationError
 
 class LibrarySerializer(serializers.ModelSerializer):
 
-    def validator_email(self, email): ##???
-        if len(email) > 6:
-            if not re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
-                return 1
-        return email
+    # def validator_email(self, email): ##???
+    #     if len(email) > 6:
+    #         if not re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
+    #             return 1
+    #     return email
 
     def validator_address(self, address):
 

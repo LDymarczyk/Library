@@ -7,7 +7,7 @@ class Library(models.Model):
     creator = models.ForeignKey(Reader, editable=False, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200)
     telephone = models.IntegerField()
-    email = models.CharField(max_length=100)
+    email = models.EmailField()
     name = models.CharField(max_length=100)
 
     def __str__(self):
