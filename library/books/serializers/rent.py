@@ -1,8 +1,25 @@
 from rest_framework import serializers
 from ..models.rent import Rent
+from ..models.book import Book
+from rest_framework.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
 
 
 class RentSerializer(serializers.ModelSerializer):
+
+    def validate(self, attrs):
+        start_date = attrs.get("start_date")
+        end_date = attrs.get("end_date")
+        if start_date>end_date:
+            raise ValidationError("End date must be later than start date.")
+        return attrs
+
+    def validate_book(self, book):
+        try:
+            books = get_object_or_404(Book, id=book)
+        except:
+            raise ValidationError("Book doesn't exist in base.")
+        return book
 
     class Meta:
         model = Rent
