@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from ..models.author import Author
 from rest_framework.exceptions import ValidationError
+from datetime import date
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -31,9 +32,11 @@ class AuthorSerializer(serializers.ModelSerializer):
     def validate_birth_year(self, birth_year):
         if birth_year<1400:
             raise ValidationError("Birth year must be greater than 1400. Printing was invented in 1450.")
+        if birth_year>date.today().year:
+            raise ValidationError("Author doesn't born yet.")
         return birth_year
 
     class Meta:
         model = Author
-        fields = ('first_name', 'last_name', 'birth_year', 'death_year')
+        fields = ('first_name', 'last_name', 'birth_year', 'death_year', 'id', 'creator', 'created')
         read_only_field = ('id', 'creator', 'created')
