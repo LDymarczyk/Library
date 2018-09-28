@@ -6,7 +6,7 @@ class Library(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     creator = models.ForeignKey(Reader, editable=False, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200)
-    telephone = models.IntegerField()
+    phone = models.CharField(max_length=20)
     email = models.EmailField()
     name = models.CharField(max_length=100)
 

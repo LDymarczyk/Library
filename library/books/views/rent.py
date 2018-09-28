@@ -44,6 +44,7 @@ class RentViewSet(viewsets.ModelViewSet):
             instance = self.get_object()
             instance.get_book().return_book()
             instance.get_book().save()
+            instance.return_book()
             self.perform_destroy(instance)
         except Http404:
             pass
