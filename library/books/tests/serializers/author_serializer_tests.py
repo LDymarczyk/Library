@@ -1,5 +1,5 @@
 from rest_framework.test import APITestCase, APIRequestFactory
-from ...models import Author, Book, Rent, Library, Reader
+from ...models import Author, Reader
 from ...serializers.author import AuthorSerializer
 from rest_framework.exceptions import ValidationError
 
@@ -22,22 +22,6 @@ class AuthorSerializersTests(APITestCase):
                                              birth_year=1890,
                                              death_year=1917,
                                              creator=self.user)
-
-        # self.library = Library.objects.create(address='ul. Klonowa 2, 40-000 Katowice',
-        #                                       email='bibl@mail.com',
-        #                                       name='Biblioteka 1',
-        #                                       telephone=123456789)
-        #
-        # self.book = Book.objects.create(title='title1',
-        #                                 author=self.author,
-        #                                 ISBN=1234567890123,
-        #                                 genre='FS',
-        #                                 edition=1,
-        #                                 publication_date=2005,
-        #                                 publishing_house='FS',
-        #                                 status=True,
-        #                                 library=self.library
-        #                                 )
 
         self.factory = APIRequestFactory()
 

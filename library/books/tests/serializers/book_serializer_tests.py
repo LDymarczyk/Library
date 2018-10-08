@@ -1,5 +1,5 @@
 from rest_framework.test import APITestCase, APIRequestFactory
-from ...models import Author, Book, Rent, Library, Reader
+from ...models import Author, Book, Library, Reader
 from ...serializers.author import AuthorSerializer
 from ...serializers.book import BookSerializer
 from rest_framework.exceptions import ValidationError
@@ -34,21 +34,53 @@ class BookSerializersTests(APITestCase):
                                         ISBN=1234567890123,
                                         genre='FS',
                                         edition=1,
+                                        amount=12,
                                         publication_date=2005,
                                         publishing_house='FS',
                                         status=True,
                                         library=self.library
                                         )
 
-        def test_contains_expected_fields_book_serializer(self):
-            data = AuthorSerializer(instance=self.book)
-            self.assertCountEqual(data.fields, {'title',
-                                                'author',
-                                                'ISBN',
-                                                'genre',
-                                                'edition',
-                                                'publication_date',
-                                                'publishing_house',
-                                                'status',
-                                                'library'
-                                                })
+        self.factory = APIRequestFactory()
+
+    def test_contains_expected_fields_book_serializer(self):
+        data = BookSerializer(instance=self.book)
+        self.assertCountEqual(data.fields, {'title',
+                                            'author',
+                                            'ISBN',
+                                            'genre',
+                                            'edition',
+                                            'amount',
+                                            'language',
+                                            'creator',
+                                            'publication_date',
+                                            'publishing_house',
+                                            'status',
+                                            'library'})
+
+    def test_validate_with_existing_author(self):
+        author = self.author
+        user = self.user
+        data = {'title':'T',
+                'author': author,
+                'creator': user,
+                'ISBN':1234567890123,
+                'genre':'Fantasy',
+                'edition':1,
+                'amount':2,
+                'language':'polski',
+                'publication_date':1300,
+                'publishing_house':'Fabryka Słów',
+                'status':True}
+        request = self.factory.get('/')
+        request.user = self.user
+        serializer = BookSerializer(data=data, context={'request': request})
+        #import pdb; pdb.set_trace()
+        self.assertTrue(serializer.is_valid())
+
+    # def test_validate_with_fake_author(self):
+    #
+    # def test_validate_with_bad_ISBN(self):
+    #
+    # def test_valdate_with_correct_ISBN(self):
+
