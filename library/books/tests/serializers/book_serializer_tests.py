@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase, APIRequestFactory
 from ...models import Author, Book, Library, Reader
 from ...serializers.book import BookSerializer
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, ErrorDetail
 
 class BookSerializersTests(APITestCase):
 
@@ -95,8 +95,7 @@ class BookSerializersTests(APITestCase):
         with self.assertRaises(ValidationError) as cm:
             serializer.is_valid(raise_exception=True)
         error = cm.exception.args[0]['author'][0]
-        self.assertEqual("Birth year must be greater than 1400. Printing was invented in 1450.",
-                         error)
+        self.assertEqual('does_not_exist', error.code)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_ISBN(self):
@@ -116,6 +115,10 @@ class BookSerializersTests(APITestCase):
         request = self.factory.get('/')
         request.user = self.user
         serializer = BookSerializer(data=data, context={'request': request})
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['ISBN'][0]
+        self.assertEqual('ISBN number must have exactly 10 or 13 digits.', error)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_genre(self):
@@ -135,6 +138,10 @@ class BookSerializersTests(APITestCase):
         request = self.factory.get('/')
         request.user = self.user
         serializer = BookSerializer(data=data, context={'request': request})
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['genre'][0]
+        self.assertEqual('invalid_choice', error.code)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_publication_date(self):
@@ -154,6 +161,10 @@ class BookSerializersTests(APITestCase):
         request = self.factory.get('/')
         request.user = self.user
         serializer = BookSerializer(data=data, context={'request': request})
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['publication_date'][0]
+        self.assertEqual('Publication date must be greater than 1450. Printing was invented in 1450.', error)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_status(self):
@@ -173,6 +184,10 @@ class BookSerializersTests(APITestCase):
         request = self.factory.get('/')
         request.user = self.user
         serializer = BookSerializer(data=data, context={'request': request})
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['non_field_errors'][0]
+        self.assertEqual("Status of book can't be True if there are no books.", error)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_publication_date_future(self):
@@ -192,6 +207,10 @@ class BookSerializersTests(APITestCase):
         request = self.factory.get('/')
         request.user = self.user
         serializer = BookSerializer(data=data, context={'request': request})
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['publication_date'][0]
+        self.assertEqual("This book will be publish in the future.", error)
         self.assertFalse(serializer.is_valid())
 
 

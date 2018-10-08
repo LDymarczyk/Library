@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ..models.book import Book
+from ..models import Book, Author
+from ..models.book import get_genre
 from datetime import date
 from rest_framework.exceptions import ValidationError
 
@@ -29,6 +30,23 @@ class BookSerializer(serializers.ModelSerializer):
         if publication_date>date.today().year:
             raise ValidationError("This book will be publish in the future.")
         return publication_date
+
+    # def validate_genre(self, genre):
+    #     genres = get_genre()
+    #     is_valid = False
+    #     for i in genres:
+    #         if genre == i:
+    #             is_valid = True
+    #     if not is_valid:
+    #         raise ValidationError("Genre is not in base.")
+
+
+    # def validate_author(self, author):
+    #     authors = Author.objects.all()
+    #     for i in range(len(authors)):
+    #         if authors[i].pk!=author:
+    #             raise ValidationError("Author does not exist!")
+
 
     class Meta:
         model = Book

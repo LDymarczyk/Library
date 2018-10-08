@@ -3,6 +3,7 @@ from .author import Author
 from .user import Reader
 from .library import Library
 
+
 GENRE_CHOICES = (
     ('FS', "Fantasy"),
     ('SF', "Science-fiction"),
@@ -10,6 +11,11 @@ GENRE_CHOICES = (
     ('RM', "Romance"),
     ('CM', "Comedy"),
 )
+
+
+def get_genre():
+    return GENRE_CHOICES
+
 
 PUBL_HOUSE = (
     ('FS', 'Fabryka Słów'),
