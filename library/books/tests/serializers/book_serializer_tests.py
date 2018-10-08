@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase, APIRequestFactory
 from ...models import Author, Book, Library, Reader
 from ...serializers.book import BookSerializer
 from rest_framework.exceptions import ValidationError, ErrorDetail
+from datetime import datetime
 
 class BookSerializersTests(APITestCase):
 
@@ -23,9 +24,12 @@ class BookSerializersTests(APITestCase):
                                              death_year=1917,
                                              creator=self.user)
 
+        today = datetime.today()
+        number = str(today.hour)+str(today.min)+str(today.second)
+
         self.library = Library.objects.create(address='ul. Klonowa 2, 40-000 Katowice',
                                               email='bibl@mail.com',
-                                              name='Biblioteka 1',
+                                              name='Biblioteka '+number,
                                               phone='123456789')
 
         self.book = Book.objects.create(title='title1',

@@ -1,29 +1,28 @@
 from rest_framework import serializers
 from ..models.library import Library
 from rest_framework.exceptions import ValidationError
-import re
 
 
 class LibrarySerializer(serializers.ModelSerializer):
 
-    # def validator_email(self, email): ##???
-    #     if len(email) > 6:
-    #         if not re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
-    #             return 1
-    #     return email
-
-    def validator_address(self, address):
-
-        return address
-
-    def validator_name(self, name):
+    def validate_name(self, name):
         libraries = Library.objects.all()
+        for library in libraries:
+            if library.name==name:
+                raise ValidationError("This name already exist in our base.")
         return name
 
-    def validator_phone(self, phone):
-        phone_pattern = re.compile('(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{3}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{3}|\d{3}[-\.\s]??\d{3})')
-        if not phone_pattern.match(phone):
-            raise ValidationError("Bad phone number")
+    def validate_phone(self, phone):
+        # raise ValidationError("test")
+        numbers='1234567890'
+        is_valid=True
+        for number in phone:
+            if number not in numbers:
+                is_valid=False
+        if len(phone)!=9:
+            is_valid=False
+        if not is_valid:
+            raise ValidationError("Entered bad phone number.")
         return phone
 
     class Meta:

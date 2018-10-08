@@ -16,6 +16,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         return attrs
 
     def validate_first_name(self, first_name):
+        # raise ValidationError("test")
         if len(first_name)<4:
             raise ValidationError("First name must be longer than 3 letters.")
         if len(first_name)>=57:
