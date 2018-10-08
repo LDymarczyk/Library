@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="61bca471-3bbd-4d6f-87b1-3fc610e085da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/models/rent.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/models/rent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/books/tests/models/rent_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/tests/models/rent_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/tests/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/tests/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,27 +24,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="48" />
+          <entry key="py" value="49" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="48" />
+          <entry key="Python" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="128" />
           <entry key="dummy" value="45" />
-          <entry key="py" value="4594" />
+          <entry key="py" value="4734" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Python" value="4722" />
+          <entry key="Python" value="4862" />
         </counts>
       </usages-collector>
     </session>
@@ -59,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/tests/serializers/author_serializer_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
+            <state relative-caret-position="-105">
               <caret line="23" column="63" lean-forward="true" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
@@ -72,12 +67,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/books/tests/models/rent_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+            <state relative-caret-position="78">
+              <caret line="30" column="59" lean-forward="true" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
-                <marker date="1538993310591" expanded="true" signature="163:2114" ph="..." />
-                <marker date="1538993310591" expanded="true" signature="2108:2109" ph="..." />
+                <marker date="1538995198187" expanded="true" signature="189:2170" ph="..." />
+                <marker date="1538995198187" expanded="true" signature="2164:2165" ph="..." />
               </folding>
             </state>
           </provider>
@@ -112,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="309">
+              <caret line="40" column="41" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="40" selection-end-column="41" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
               </folding>
@@ -185,9 +180,9 @@
         <option value="$PROJECT_DIR$/books/views/rent.py" />
         <option value="$PROJECT_DIR$/books/serializers/library.py" />
         <option value="$PROJECT_DIR$/books/tests/serializers/__init__.py" />
-        <option value="$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py" />
         <option value="$PROJECT_DIR$/books/models/rent.py" />
         <option value="$PROJECT_DIR$/books/models/library.py" />
+        <option value="$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py" />
         <option value="$PROJECT_DIR$/books/tests/models/rent_tests.py" />
       </list>
     </option>
@@ -314,9 +309,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1293" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19291338" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19291338" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -327,7 +321,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5203915" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.6443719" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32952693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -404,13 +398,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/books/tests/serializers/user_serializer_tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/books/models/book.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../venv/lib/python3.6/site-packages/django/utils/six.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -503,33 +490,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/books/models/book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1538043006870" expanded="true" signature="1443:1479" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/books/models/library.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/books/tests/serializers/author_serializer_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="23" column="63" lean-forward="true" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-            <marker date="1538129681640" expanded="true" signature="269:270" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -546,14 +523,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/books/tests/serializers/author_serializer_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="23" column="63" lean-forward="true" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+            <marker date="1538129681640" expanded="true" signature="269:270" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/books/tests/serializers/book_serializer_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="40" column="41" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="40" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/books/tests/models/rent_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+        <state relative-caret-position="78">
+          <caret line="30" column="59" lean-forward="true" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
-            <marker date="1538993310591" expanded="true" signature="163:2114" ph="..." />
-            <marker date="1538993310591" expanded="true" signature="2108:2109" ph="..." />
+            <marker date="1538995198187" expanded="true" signature="189:2170" ph="..." />
+            <marker date="1538995198187" expanded="true" signature="2164:2165" ph="..." />
           </folding>
         </state>
       </provider>

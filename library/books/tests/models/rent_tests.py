@@ -27,10 +27,8 @@ class RentModelTests(APITestCase):
                                               name='Biblioteka 1',
                                               phone='123456789')
 
-        import pdb;
-        pdb.set_trace()
-
         self.book = Book.objects.create(title='title1',
+                                        id=5,
                                         author=self.author,
                                         ISBN=1234567890123,
                                         genre='FS',
@@ -50,15 +48,16 @@ class RentModelTests(APITestCase):
 
     def test_custom_id(self):
         self.rent.custom_id()
-        self.assertEqual(self.rent.id, 10500)
-    #
-    # def test_get_book(self):
-    #     self.assertEqual(self.rent.get_book().id, 1)
-    #
-    # def test_make_rent(self):
-    #     self.rent.make_rent()
-    #     self.assertTrue(self.rent.status)
-    #
-    # def test_return_book(self):
-    #     self.rent.return_book()
-    #     self.assertFalse(self.rent.status)
+        self.assertEqual(self.rent.id, 10001)
+
+    def test_get_book(self):
+        self.assertEqual(self.rent.get_book().id, 5)
+
+    def test_make_rent(self):
+        self.rent.make_rent()
+        self.assertTrue(self.rent.status)
+
+    def test_return_book(self):
+        #import pdb; pdb.set_trace()
+        self.rent.return_book()
+        self.assertFalse(self.rent.status)

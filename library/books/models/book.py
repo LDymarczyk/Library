@@ -22,7 +22,7 @@ class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     creator = models.ForeignKey(Reader, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
-    ISBN = models.PositiveIntegerField()
+    ISBN = models.BigIntegerField()
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, default='FS')
     edition = models.PositiveIntegerField()
     amount = models.PositiveIntegerField()

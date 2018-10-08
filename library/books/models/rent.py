@@ -32,7 +32,7 @@ class Rent(models.Model):
 
     def return_book(self):
         today = date.today()
-        if (date(self.end_date) <= today) or self.regulated_payment:
+        if (self.end_date <= today) or self.regulated_payment:
             self.status = False
         else:
             self.late = True
