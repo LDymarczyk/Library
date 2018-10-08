@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ..models.book import Book
+from datetime import date
 from rest_framework.exceptions import ValidationError
-
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -26,6 +26,8 @@ class BookSerializer(serializers.ModelSerializer):
     def validate_publication_date(self, publication_date):
         if publication_date<1450:
             raise ValidationError("Publication date must be greater than 1450. Printing was invented in 1450.")
+        if publication_date>date.today().year:
+            raise ValidationError("This book will be publish in the future.")
         return publication_date
 
     class Meta:
