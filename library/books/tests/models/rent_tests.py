@@ -1,25 +1,64 @@
-from django.test import TestCase
-from books.models import Rent
-from books.models import Book
+from rest_framework.test import APITestCase
+from books.models import Rent, Book, Author, Library, Reader
+from datetime import date
 
-class RentModelTests(TestCase):
+
+class RentModelTests(APITestCase):
+
+    def setUp(self):
+        self.user = Reader.objects.create_user(username='Ala',
+                                               email='mail@mail.com',
+                                               password='pass')
+
+        self.author = Author.objects.create(first_name='Jan',
+                                            last_name='Kowalski',
+                                            birth_year=1990,
+                                            death_year=2017,
+                                            creator=self.user)
+
+        self.author2 = Author.objects.create(first_name='Ala',
+                                             last_name='MaKota',
+                                             birth_year=1890,
+                                             death_year=1917,
+                                             creator=self.user)
+
+        self.library = Library.objects.create(address='ul. Klonowa 2, 40-000 Katowice',
+                                              email='bibl@mail.com',
+                                              name='Biblioteka 1',
+                                              phone='123456789')
+
+        import pdb;
+        pdb.set_trace()
+
+        self.book = Book.objects.create(title='title1',
+                                        author=self.author,
+                                        ISBN=1234567890123,
+                                        genre='FS',
+                                        edition=1,
+                                        amount=12,
+                                        publication_date=2005,
+                                        publishing_house='FS',
+                                        status=True,
+                                        library=self.library
+                                        )
+
+        self.rent = Rent.objects.create(start_date=date(2018, 10, 8),
+                                        end_date=date(2018, 11, 8),
+                                        reader=self.user,
+                                        book=self.book,
+                                        )
 
     def test_custom_id(self):
-        rent = Rent(id=500)
-        rent.custom_id()
-        self.assertEqual(rent.id, 10500)
-
-    def test_get_book(self):
-        book = Book(id = 1)
-        rent = Rent(book = book)
-        self.assertEqual(rent.get_book().id,1)
-
-    def test_make_rent(self):
-        rent = Rent()
-        rent.make_rent()
-        self.assertTrue(rent.status)
-
-    def test_return_book(self):
-        rent = Rent()
-        rent.return_book()
-        self.assertFalse(rent.status)
+        self.rent.custom_id()
+        self.assertEqual(self.rent.id, 10500)
+    #
+    # def test_get_book(self):
+    #     self.assertEqual(self.rent.get_book().id, 1)
+    #
+    # def test_make_rent(self):
+    #     self.rent.make_rent()
+    #     self.assertTrue(self.rent.status)
+    #
+    # def test_return_book(self):
+    #     self.rent.return_book()
+    #     self.assertFalse(self.rent.status)
