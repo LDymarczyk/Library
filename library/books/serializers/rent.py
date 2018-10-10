@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 class RentSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
+        # import pdb; pdb.set_trace()
         start_date = attrs.get("start_date")
         end_date = attrs.get("end_date")
         if start_date>end_date:
@@ -15,9 +16,13 @@ class RentSerializer(serializers.ModelSerializer):
         return attrs
 
     def validate_book(self, book):
-        try:
-            get_object_or_404(Book, id=book)
-        except:
+        books = Book.objects.all()
+        is_valid = False
+        for volume in books:
+            if volume == book:
+                is_valid = True
+        #import pdb; pdb.set_trace()
+        if not is_valid:
             raise ValidationError("Book doesn't exist in base.")
         return book
 
