@@ -1,7 +1,4 @@
-from rest_framework.renderers import JSONRenderer
 from rest_framework.test import APIClient, APITestCase
-from django.test.client import RequestFactory
-from django.contrib.auth.models import AnonymousUser
 from ...models import Author, Reader, Book
 
 
