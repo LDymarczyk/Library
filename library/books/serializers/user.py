@@ -9,14 +9,13 @@ class UserSerializer(serializers.ModelSerializer):
         if len(str(PESEL))!=11:
             raise ValidationError("PESEL number must have 11 digits.")
         control_sum = 0
-        control_numbers = [1,3,7,9,1,3,7,9,1,3]
+        control_numbers = [1,3,7,9,1,3,7,9,1,3,7]
         for i in range(11):
             control_sum += int(str(PESEL)[i]) * control_numbers[i]
-        if not control_sum % 10:
+        if control_sum % 10:
             raise ValidationError("PESEL number is incorrect.")
         return PESEL
 
     class Meta:
         model = Reader
-        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'birth_date', 'address', 'telephone')
-        read_only_fields = ('PESEL',)
+        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'birth_date', 'address', 'telephone', 'PESEL')

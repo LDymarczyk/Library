@@ -25,18 +25,28 @@ class RentSerializersTests(APITestCase):
                                             'last_name',
                                             'birth_date',
                                             'address',
-                                            'telephone'
+                                            'telephone',
+                                            'PESEL'
                                             })
 
     def test_validate_with_correct_values(self):
         serializer = UserSerializer(instance=self.user, data=self.user_attrs)
         self.assertTrue(serializer.is_valid())
 
-    # def test_validate_with_non_existing_book(self):
-    #     self.rent_attrs['book'] = self.book.pk + 500000
-    #     serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
-    #     with self.assertRaises(ValidationError) as cm:
-    #         serializer.is_valid(raise_exception=True)
-    #     error = cm.exception.args[0]['book'][0]
-    #     self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.book.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
-    #     self.assertFalse(serializer.is_valid())
+    def test_validate_with_short_PESEL(self):
+        self.user_attrs['PESEL'] = 1111
+        serializer = UserSerializer(instance=self.user, data=self.user_attrs)
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['PESEL'][0]
+        self.assertEqual('PESEL number must have 11 digits.', error)
+        self.assertFalse(serializer.is_valid())
+
+    def test_validate_with_bad_PESEL(self):
+        self.user_attrs['PESEL'] = 11111111111
+        serializer = UserSerializer(instance=self.user, data=self.user_attrs)
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['PESEL'][0]
+        self.assertEqual('PESEL number is incorrect.', error)
+        self.assertFalse(serializer.is_valid())
