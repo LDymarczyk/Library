@@ -6,7 +6,9 @@ from .user import Reader
 
 class Author(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False, null=True, blank=True)
+    edited = models.DateTimeField(blank=True, null=True)
     creator = models.ForeignKey('Reader', on_delete=models.SET_NULL, editable=False, null=True, blank=True)
+    editor = models.ForeignKey(Reader, related_name='author_editor', editable=False, on_delete=models.SET_NULL, null=True)
     first_name = models.CharField(max_length=75)
     last_name = models.CharField(max_length=75)
     birth_year = models.IntegerField(null=True, blank=True)

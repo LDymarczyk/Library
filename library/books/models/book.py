@@ -26,7 +26,9 @@ PUBL_HOUSE = (
 
 class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
+    edited = models.DateTimeField(blank=True, null=True)
     creator = models.ForeignKey(Reader, on_delete=models.SET_NULL, null=True)
+    editor = models.ForeignKey(Reader, related_name='book_editor', editable=False, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
     ISBN = models.BigIntegerField()
     genre = models.CharField(max_length=2, choices=GENRE_CHOICES, default='FS')
