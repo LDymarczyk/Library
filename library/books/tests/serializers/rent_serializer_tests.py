@@ -3,10 +3,7 @@ from ...models import Author, Book, Library, Reader, Rent
 from ...serializers.rent import RentSerializer
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime, date
-
-def make_random_number():
-    today = datetime.today()
-    return str(today.hour) + str(today.min) + str(today.second) +str(today.microsecond)
+from ..tools import make_random_number
 
 class RentSerializersTests(APITestCase):
 

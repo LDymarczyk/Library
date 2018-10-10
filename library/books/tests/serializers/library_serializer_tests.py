@@ -3,10 +3,7 @@ from ...models import Author, Book, Library, Reader
 from ...serializers.library import LibrarySerializer
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime
-
-def make_random_number():
-    today = datetime.today()
-    return str(today.hour) + str(today.min) + str(today.second) +str(today.microsecond)
+from ..tools import make_random_number
 
 class LibrarySerializersTests(APITestCase):
 
