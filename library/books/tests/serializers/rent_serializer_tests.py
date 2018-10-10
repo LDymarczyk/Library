@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime, date
 from ..tools import make_random_number
 
-class RentSerializersTests(APITestCase):
+class RentSerializerTests(APITestCase):
 
     def setUp(self):
 
