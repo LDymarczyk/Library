@@ -28,8 +28,9 @@ class BookPermissionTest(APITestCase):
 
         self.book_attrs = {'title': 'Tytuł tom 1',
                            'author': self.author,
+                           'creator': self.user,
                            'ISBN': 1234567890123,
-                           'genre': 'FA',
+                           'genre': 'FS',
                            'edition': 1,
                            'amount': 2,
                            'language': 'polski',
@@ -44,8 +45,9 @@ class BookPermissionTest(APITestCase):
 
     def test_book_perform_create_method(self):
         client = APIClient()
-        client.force_authenticate(self.user)
+        client.force_authenticate(self.superuser)
         self.book_attrs['author']=self.author.pk
+        self.book_attrs['creator']=self.superuser.pk
         response_create_book = client.post(self.book_list_url, self.book_attrs, format='json')
         self.assertEqual(response_create_book.status_code, 201)
         self.assertTrue(Book.objects.filter(title='Tytuł tom 1', creator=self.user).exists())
