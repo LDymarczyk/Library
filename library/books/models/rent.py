@@ -11,7 +11,6 @@ class Rent(models.Model):
     end_date = models.DateField(null=True, blank=True)
     reader = models.ForeignKey(Reader,related_name='rent_reader', on_delete=models.PROTECT)
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='book_to_rent')
-    library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True) #?
     status = models.BooleanField(null=True, blank=True)
     late = models.BooleanField(null=True, blank=True)
     regulated_payment = models.BooleanField(null=True, blank=True)

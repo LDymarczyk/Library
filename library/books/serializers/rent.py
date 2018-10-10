@@ -27,5 +27,5 @@ class RentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rent
-        fields = ('start_date', 'end_date', 'book', 'reader', 'library')
+        fields = ('start_date', 'end_date', 'book', 'reader')
         read_only_field = ('creator', 'id')

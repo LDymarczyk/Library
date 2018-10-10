@@ -5,10 +5,10 @@ from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime, date
 from ..tools import make_random_number
 
+
 class RentSerializerTests(APITestCase):
 
     def setUp(self):
-
         self.user = Reader.objects.create_user(username='Ala',
                                                email='mail@mail.com',
                                                password='pass')
@@ -42,10 +42,10 @@ class RentSerializerTests(APITestCase):
                                         library=self.library
                                         )
 
-        self.rent_attrs = {'start_date' : date(2018,10,20),
-                            'end_date' : date(2018,11,8),
-                            'reader' : self.user,
-                            'book' : self.book}
+        self.rent_attrs = {'start_date': date(2018, 10, 20),
+                           'end_date': date(2018, 11, 8),
+                           'reader': self.user,
+                           'book': self.book}
 
         self.rent = Rent.objects.create(**self.rent_attrs)
 
@@ -56,13 +56,11 @@ class RentSerializerTests(APITestCase):
         self.assertCountEqual(data.fields, {'end_date',
                                             'start_date',
                                             'reader',
-                                            'book',
-                                            'library'
-                                            })
+                                            'book'})
 
     def test_validate_with_correct_values(self):
-        self.rent_attrs['reader']=self.user.pk
-        self.rent_attrs['book']=self.book.pk
+        self.rent_attrs['reader'] = self.user.pk
+        self.rent_attrs['book'] = self.book.pk
         serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
         self.assertTrue(serializer.is_valid())
 
@@ -72,7 +70,8 @@ class RentSerializerTests(APITestCase):
         with self.assertRaises(ValidationError) as cm:
             serializer.is_valid(raise_exception=True)
         error = cm.exception.args[0]['book'][0]
-        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.book.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
+        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.book.pk + 500000) + '" - object does not exist.',
+                                     code='does_not_exist'), error)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_non_existing_reader(self):
@@ -81,7 +80,8 @@ class RentSerializerTests(APITestCase):
         with self.assertRaises(ValidationError) as cm:
             serializer.is_valid(raise_exception=True)
         error = cm.exception.args[0]['reader'][0]
-        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.user.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
+        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.user.pk + 500000) + '" - object does not exist.',
+                                     code='does_not_exist'), error)
         self.assertFalse(serializer.is_valid())
 
     def test_validate_with_bad_dates(self):
@@ -95,4 +95,3 @@ class RentSerializerTests(APITestCase):
         error = cm.exception.args[0]['non_field_errors'][0]
         self.assertEqual('End date must be later than start date.', error)
         self.assertFalse(serializer.is_valid())
-
