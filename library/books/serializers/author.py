@@ -7,12 +7,13 @@ from datetime import date
 class AuthorSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
-        birth_year = attrs.get('birth_year')
-        death_year = attrs.get('death_year')
-        if birth_year>death_year:
-            raise ValidationError("People can't die before their birth. Wrong birth/death years.")
-        if death_year-birth_year<10:
-            raise ValidationError("Some people are geniuses, but I don't think they can write a book before they are 10.")
+        birth_year = attrs.get('birth_year', None)
+        death_year = attrs.get('death_year', None)
+        if birth_year and death_year:
+            if birth_year>death_year:
+                raise ValidationError("People can't die before their birth. Wrong birth/death years.")
+            if death_year-birth_year<10:
+                raise ValidationError("Some people are geniuses, but I don't think they can write a book before they are 10.")
         return attrs
 
     def validate_first_name(self, first_name):
