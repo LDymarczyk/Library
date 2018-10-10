@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
 from django_filters import rest_framework as dfilters
+from datetime import datetime
 
 
 class AuthorFilter(dfilters.FilterSet):
@@ -33,5 +34,9 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user, edited=datetime.today())
+
 
 

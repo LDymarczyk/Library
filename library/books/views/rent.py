@@ -38,6 +38,9 @@ class RentViewSet(viewsets.ModelViewSet):
         book.rent_book()
         serializer.save(creator=self.request.user, end_date=end_date, start_date=start_date)
 
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user, edited=datetime.today())
+
     def destroy(self, request, *args, **kwargs):
         #import pdb; pdb.set_trace()
         try:

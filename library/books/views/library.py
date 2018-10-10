@@ -15,7 +15,8 @@ class LibraryViewSet(viewsets.ModelViewSet):
     search_fields = ('address', 'name')
     ordering_fields = ('address', 'name')
 
-
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user, edited=datetime.today())

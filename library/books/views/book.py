@@ -30,6 +30,9 @@ class BookViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user, edited=datetime.today())
+
     @action(methods=['get'], detail=False)
     def show_available_books(self, request):
         books = list(Book.objects.all())

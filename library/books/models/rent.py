@@ -1,7 +1,6 @@
 from django.db import models
 from .user import Reader
 from .book import Book
-from .library import Library
 from datetime import date
 
 
