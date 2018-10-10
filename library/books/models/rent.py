@@ -7,7 +7,7 @@ from datetime import date
 
 class Rent(models.Model):
     creator = models.ForeignKey(Reader, related_name='rent_creator', editable=False, on_delete=models.SET_NULL, null=True)
-    start_date = models.DateField(null=True, editable=False)
+    start_date = models.DateField(null=True)
     end_date = models.DateField(null=True, blank=True)
     reader = models.ForeignKey(Reader,related_name='rent_reader', on_delete=models.PROTECT)
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='book_to_rent')

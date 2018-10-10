@@ -45,10 +45,12 @@ class RentSerializersTests(APITestCase):
                                         library=self.library
                                         )
 
-        self.rent = Rent.objects.create(start_date=date(2018,10,8),
-                                        end_date=date(2018,11,8),
-                                        reader=self.user,
-                                        book=self.book)
+        self.rent_attrs = {'start_date' : date(2018,10,20),
+                            'end_date' : date(2018,11,8),
+                            'reader' : self.user,
+                            'book' : self.book}
+
+        self.rent = Rent.objects.create(**self.rent_attrs)
 
         self.factory = APIRequestFactory()
 
@@ -62,27 +64,38 @@ class RentSerializersTests(APITestCase):
                                             })
 
     def test_validate_with_correct_values(self):
-        user, book = self.user, self.book
-        data = {'start_date' : date(2018,10,8),
-                'end_date' : date(2018,11,8),
-                'reader' : user.pk,
-                'book' : book.pk}
-        request = self.factory.get('/')
-        request.user = self.user
-        serializer = RentSerializer(data=data, context={'request': request})
-        #import pdb; pdb.set_trace()
+        self.rent_attrs['reader']=self.user.pk
+        self.rent_attrs['book']=self.book.pk
+        serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
         self.assertTrue(serializer.is_valid())
-    #
-    # def test_validate_with_bad_email(self):
-    #     data = {'address':"aaaaaaa",
-    #             'email':"email",
-    #             'name':"aaaaaaa"+make_random_number(),
-    #             'phone':"123456789"}
-    #     request = self.factory.get('/')
-    #     request.user = self.user
-    #     serializer = LibrarySerializer(data=data, context={'request': request})
-    #     with self.assertRaises(ValidationError) as cm:
-    #         serializer.is_valid(raise_exception=True)
-    #     error = cm.exception.args[0]['email'][0]
-    #     self.assertEqual(ErrorDetail(string='Enter a valid email address.', code='invalid'), error)
-    #     self.assertFalse(serializer.is_valid())
+
+    def test_validate_with_non_existing_book(self):
+        self.rent_attrs['book'] = self.book.pk + 500000
+        serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['book'][0]
+        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.book.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
+        self.assertFalse(serializer.is_valid())
+
+    def test_validate_with_non_existing_reader(self):
+        self.rent_attrs['reader'] = self.user.pk + 500000
+        serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['reader'][0]
+        self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.user.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
+        self.assertFalse(serializer.is_valid())
+
+    def test_validate_with_bad_dates(self):
+        self.rent_attrs['reader'] = self.user.pk
+        self.rent_attrs['book'] = self.book.pk
+        self.rent_attrs['start_date'] = date(2018, 12, 10)
+        self.rent_attrs['end_date'] = date(2018, 10, 10)
+        serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
+        with self.assertRaises(ValidationError) as cm:
+            serializer.is_valid(raise_exception=True)
+        error = cm.exception.args[0]['non_field_errors'][0]
+        self.assertEqual('End date must be later than start date.', error)
+        self.assertFalse(serializer.is_valid())
+
