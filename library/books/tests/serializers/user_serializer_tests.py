@@ -1,12 +1,8 @@
 from rest_framework.test import APITestCase, APIRequestFactory
-from ...models import Author, Book, Library, Reader, Rent
+from ...models import Reader
 from ...serializers.user import UserSerializer
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime, date
-
-def make_random_number():
-    today = datetime.today()
-    return str(today.hour) + str(today.min) + str(today.second) +str(today.microsecond)
 
 class RentSerializersTests(APITestCase):
 
@@ -31,3 +27,16 @@ class RentSerializersTests(APITestCase):
                                             'address',
                                             'telephone'
                                             })
+
+    def test_validate_with_correct_values(self):
+        serializer = UserSerializer(instance=self.user, data=self.user_attrs)
+        self.assertTrue(serializer.is_valid())
+
+    # def test_validate_with_non_existing_book(self):
+    #     self.rent_attrs['book'] = self.book.pk + 500000
+    #     serializer = RentSerializer(instance=self.rent, data=self.rent_attrs)
+    #     with self.assertRaises(ValidationError) as cm:
+    #         serializer.is_valid(raise_exception=True)
+    #     error = cm.exception.args[0]['book'][0]
+    #     self.assertEqual(ErrorDetail(string='Invalid pk "' + str(self.book.pk + 500000) + '" - object does not exist.', code='does_not_exist'), error)
+    #     self.assertFalse(serializer.is_valid())
