@@ -4,7 +4,8 @@ from ...serializers.user import UserSerializer
 from rest_framework.exceptions import ValidationError, ErrorDetail
 from datetime import datetime, date
 
-class RentSerializersTests(APITestCase):
+
+class UserSerializersTests(APITestCase):
 
     def setUp(self):
 
@@ -30,6 +31,11 @@ class RentSerializersTests(APITestCase):
                                             })
 
     def test_validate_with_correct_values(self):
+        serializer = UserSerializer(instance=self.user, data=self.user_attrs)
+        self.assertTrue(serializer.is_valid())
+
+    def test_validate_with_correct_PESEL(self):
+        self.user_attrs['PESEL'] = 11110111111
         serializer = UserSerializer(instance=self.user, data=self.user_attrs)
         self.assertTrue(serializer.is_valid())
 
