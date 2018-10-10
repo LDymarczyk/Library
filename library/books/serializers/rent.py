@@ -8,10 +8,11 @@ from django.shortcuts import get_object_or_404
 class RentSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
-        start_date = attrs.get("start_date")
-        end_date = attrs.get("end_date")
-        if start_date>end_date:
-            raise ValidationError("End date must be later than start date.")
+        start_date = attrs.get("start_date", None)
+        end_date = attrs.get("end_date", None)
+        if start_date and end_date:
+            if start_date>end_date:
+                raise ValidationError("End date must be later than start date.")
         return attrs
 
     def validate_book(self, book):
