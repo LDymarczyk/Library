@@ -61,11 +61,12 @@ class RentViewSet(viewsets.ModelViewSet):
 
     @action(methods=['delete'], detail=True)
     def regulate_payment(self, request, pk=None):
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         instance = self.get_object()
         if instance.late and not instance.regulated_payment:
             instance.cost = 0
             instance.regulated_payment = True
             instance.status = False
-        pass
+            instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
