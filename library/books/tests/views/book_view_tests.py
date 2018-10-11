@@ -1,7 +1,7 @@
 from rest_framework.test import APIClient, APITestCase
+from rest_framework.renderers import JSONRenderer
 from ...models import Author, Reader, Book
-from django.core import serializers
-from django.http import HttpResponse
+from ...serializers.book import BookSerializer
 
 
 class BookPermissionTest(APITestCase):
@@ -106,9 +106,9 @@ class BookPermissionTest(APITestCase):
 
     def test_book_action_show_available_books(self):
         client = APIClient()
-        response_available_books = client.get(self.book_available_action_url)  # content
+        response_available_books = client.get(self.book_available_action_url)  # data
         self.assertEqual(response_available_books.status_code, 200)
-        queryset = Book.objects.all()
-        queryset_json = serializers.serialize('json', queryset)
-        # import pdb;
-        # pdb.set_trace()
+        queryset = Book.objects.filter(status=True)
+        serializer = BookSerializer(queryset, many=True)
+        self.assertEqual(len(response_available_books.data), len(queryset))
+        self.assertEqual(response_available_books.data, serializer.data)
