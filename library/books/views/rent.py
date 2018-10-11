@@ -47,6 +47,7 @@ class RentViewSet(viewsets.ModelViewSet):
             instance = self.get_object()
             instance.return_book()
             instance.save()
+            #import pdb; pdb.set_trace()
             instance.get_book().return_book()
             instance.get_book().save()
         except Http404:
