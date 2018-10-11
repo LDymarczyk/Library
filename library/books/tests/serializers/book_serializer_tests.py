@@ -59,7 +59,11 @@ class BookSerializersTests(APITestCase):
                                             'publication_date',
                                             'publishing_house',
                                             'status',
-                                            'library'})
+                                            'library',
+                                            'id',
+                                            'editor',
+                                            'edited',
+                                            'created'})
 
     def test_validate_with_correct_values(self):
         author = self.author

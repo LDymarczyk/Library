@@ -38,7 +38,12 @@ class LibrarySerializersTests(APITestCase):
         self.assertCountEqual(data.fields, {'address',
                                             'email',
                                             'name',
-                                            'phone'
+                                            'phone',
+                                            'id',
+                                            'creator',
+                                            'editor',
+                                            'created',
+                                            'edited'
                                             })
 
     def test_validate_with_correct_values(self):

@@ -29,7 +29,8 @@ class AuthorSerializersTests(APITestCase):
         data = AuthorSerializer(instance=self.author)
         self.assertCountEqual(data.fields, {'first_name', 'last_name',
                                             'birth_year', 'death_year',
-                                            'id', 'creator', 'created'
+                                            'id', 'creator', 'created',
+                                            'editor','edited'
                                             })
 
     def test_validate_with_valid_author(self):

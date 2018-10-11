@@ -56,7 +56,12 @@ class RentSerializerTests(APITestCase):
         self.assertCountEqual(data.fields, {'end_date',
                                             'start_date',
                                             'reader',
-                                            'book'})
+                                            'book',
+                                            'id',
+                                            'creator',
+                                            'editor',
+                                            'created',
+                                            'edited'})
 
     def test_validate_with_correct_values(self):
         self.rent_attrs['reader'] = self.user.pk
