@@ -23,7 +23,7 @@ class RentViewSet(viewsets.ModelViewSet):
     ordering_fields = ('rent_id', 'book')
 
     def perform_create(self, serializer):
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         book_id = self.request.data['book']
         book = get_object_or_404(Book, pk=book_id)
         if not book.status:
@@ -43,25 +43,21 @@ class RentViewSet(viewsets.ModelViewSet):
         serializer.save(editor=self.request.user, edited=datetime.today())
 
     def destroy(self, request, *args, **kwargs):
-        #import pdb; pdb.set_trace()
         try:
             instance = self.get_object()
             instance.return_book()
             instance.save()
             instance.get_book().return_book()
             instance.get_book().save()
-            #self.perform_destroy(instance)
         except Http404:
             pass
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_destroy(self, instance):
-
         pass
 
     @action(methods=['delete'], detail=True)
     def regulate_payment(self, request, pk=None):
-        #import pdb; pdb.set_trace()
         instance = self.get_object()
         if instance.late and not instance.regulated_payment:
             instance.cost = 0
@@ -69,4 +65,3 @@ class RentViewSet(viewsets.ModelViewSet):
             instance.status = False
             instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
