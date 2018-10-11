@@ -45,9 +45,9 @@ class RentViewSet(viewsets.ModelViewSet):
         # import pdb; pdb.set_trace()
         try:
             instance = self.get_object()
-            instance.get_book().return_book()
-            instance.get_book().save()
-            instance.return_book()
+            if instance.return_book():
+                instance.get_book().return_book()
+                instance.get_book().save()
             self.perform_destroy(instance)
         except Http404:
             pass

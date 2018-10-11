@@ -17,11 +17,11 @@ class AuthorPermissionTest(APITestCase):
                                                PESEL=12344678901)
 
         self.user2 = Reader.objects.create_user(username='alaniemakota',
-                                               first_name="Ala",
-                                               last_name="NieMaKota",
-                                               email='email@email.com',
-                                               password='pass1234',
-                                               PESEL=12344678901)
+                                                first_name="Ala",
+                                                last_name="NieMaKota",
+                                                email='email@email.com',
+                                                password='pass1234',
+                                                PESEL=12344678901)
 
         self.author_attrs = {'first_name': 'Adam',
                              'last_name': 'Kowalski',
@@ -61,3 +61,14 @@ class AuthorPermissionTest(APITestCase):
         response_modify_author = client.patch(self.author_detail_url, {'first_name': author_first_name}, format='json')
         self.assertEqual(response_modify_author.status_code, 403)
         self.assertFalse(Author.objects.filter(first_name=author_first_name).exists())
+
+    def test_author_perform_destroy_method(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_destroy_author = client.delete(self.author_detail_url)
+        self.assertEqual(response_destroy_author.status_code, 204)
+
+    def test_author_perform_destroy_method_for_anonymous(self):
+        client = APIClient()
+        response_destroy_author = client.delete(self.author_detail_url)
+        self.assertEqual(response_destroy_author.status_code, 403)
