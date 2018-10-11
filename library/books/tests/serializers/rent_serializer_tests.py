@@ -61,7 +61,11 @@ class RentSerializerTests(APITestCase):
                                             'creator',
                                             'editor',
                                             'created',
-                                            'edited'})
+                                            'edited',
+                                            'status',
+                                            'late',
+                                            'cost',
+                                            'regulated_payment'})
 
     def test_validate_with_correct_values(self):
         self.rent_attrs['reader'] = self.user.pk

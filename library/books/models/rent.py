@@ -14,7 +14,7 @@ class Rent(models.Model):
     reader = models.ForeignKey(Reader,related_name='rent_reader', on_delete=models.PROTECT)
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='book_to_rent')
     status = models.NullBooleanField(default=True)
-    late = models.NullBooleanField(null=True, blank=True)
+    late = models.NullBooleanField(default=False)
     regulated_payment = models.NullBooleanField(default=False)
     cost = models.FloatField(null=True, blank=True)
 

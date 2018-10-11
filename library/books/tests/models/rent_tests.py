@@ -41,7 +41,7 @@ class RentModelTests(APITestCase):
                                         )
 
         self.rent = Rent.objects.create(start_date=date(2018, 10, 8),
-                                        end_date=date(2018, 11, 8),
+                                        end_date=date(2019, 11, 8),
                                         reader=self.user,
                                         book=self.book,
                                         )

@@ -22,7 +22,7 @@ class RentViewSet(viewsets.ModelViewSet):
     ordering_fields = ('rent_id', 'book')
 
     def perform_create(self, serializer):
-        # import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         book_id = self.request.data['book']
         book = get_object_or_404(Book, pk=book_id)
         if not book.status:
