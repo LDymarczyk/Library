@@ -46,9 +46,16 @@ class RentModelTests(APITestCase):
                                         book=self.book,
                                         )
 
+        self.rent2 = Rent.objects.create(start_date=date(2018, 3, 8),
+                                        end_date=date(2018, 10, 8),
+                                        reader=self.user,
+                                        book=self.book,
+                                        )
+
     def test_custom_id(self):
+        id = self.rent.id
         self.rent.custom_id()
-        self.assertEqual(self.rent.id, 10001)
+        self.assertEqual(self.rent.id, 10000+id)
 
     def test_get_book(self):
         self.assertEqual(self.rent.get_book().id, 5)
@@ -61,3 +68,7 @@ class RentModelTests(APITestCase):
         #import pdb; pdb.set_trace()
         self.rent.return_book()
         self.assertFalse(self.rent.status)
+
+    def test_calculate_payment(self):
+        self.rent2.calculate_payment()
+        self.assertEqual(self.rent2.cost/2, (date.today() - self.rent2.end_date).days )

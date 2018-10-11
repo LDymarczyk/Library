@@ -27,7 +27,7 @@ class Rent(models.Model):
     def calculate_payment(self):
         current_day = date.today()
         days_between = (current_day - self.end_date).days
-        return days_between * 2
+        self.cost = days_between * 2
 
     def pay_for_late(self, money):
         self.cost -= money
