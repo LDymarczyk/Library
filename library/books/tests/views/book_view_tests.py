@@ -1,5 +1,7 @@
 from rest_framework.test import APIClient, APITestCase
 from ...models import Author, Reader, Book
+from django.core import serializers
+from django.http import HttpResponse
 
 
 class BookPermissionTest(APITestCase):
@@ -41,10 +43,35 @@ class BookPermissionTest(APITestCase):
                            'publishing_house': 'FS',
                            'status': True}
 
+        self.book_attrs2 = {'title': 'Tytuł tom 5',
+                            'author': self.author,
+                            'ISBN': 1234567890123,
+                            'genre': 'FS',
+                            'edition': 3,
+                            'amount': 2,
+                            'language': 'polski',
+                            'publication_date': 1900,
+                            'publishing_house': 'FS',
+                            'status': False}
+
+        self.book_attrs3 = {'title': 'Tytuł tom 6',
+                            'author': self.author,
+                            'ISBN': 1234567890123,
+                            'genre': 'FS',
+                            'edition': 3,
+                            'amount': 2,
+                            'language': 'polski',
+                            'publication_date': 1900,
+                            'publishing_house': 'FS',
+                            'status': True}
+
         self.book = Book.objects.create(**self.book_attrs)
+        self.book2 = Book.objects.create(**self.book_attrs2)
+        self.book3 = Book.objects.create(**self.book_attrs3)
 
         self.book_list_url = '/books/'
         self.book_detail_url = '/books/{}/'.format(self.book.pk)
+        self.book_available_action_url = '/books/show_available_books/'
 
     def test_book_perform_create_method(self):
         client = APIClient()
@@ -76,3 +103,12 @@ class BookPermissionTest(APITestCase):
         response_update_book = client.patch(self.book_detail_url, {'title': book_title}, format='json')
         self.assertEqual(response_update_book.status_code, 403)
         self.assertFalse(Book.objects.filter(title=book_title).exists())
+
+    def test_book_action_show_available_books(self):
+        client = APIClient()
+        response_available_books = client.get(self.book_available_action_url)  # content
+        self.assertEqual(response_available_books.status_code, 200)
+        queryset = Book.objects.all()
+        queryset_json = serializers.serialize('json', queryset)
+        # import pdb;
+        # pdb.set_trace()
