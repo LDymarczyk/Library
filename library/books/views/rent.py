@@ -22,7 +22,7 @@ class RentViewSet(viewsets.ModelViewSet):
     ordering_fields = ('rent_id', 'book')
 
     def perform_create(self, serializer):
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         book_id = self.request.data['book']
         book = get_object_or_404(Book, pk=book_id)
         if not book.status:
@@ -30,7 +30,7 @@ class RentViewSet(viewsets.ModelViewSet):
         if 'start_date' not in self.request.data.keys():
             start_date = date.today()
         else:
-            start_date = datetime.strptime(self.request.data['start_date'],'%Y-%m-%d').date()
+            start_date = datetime.strptime(self.request.data['start_date'], '%Y-%m-%d').date()
         if 'end_date' not in self.request.data.keys():
             end_date = start_date + timedelta(days=14)
         else:
@@ -42,7 +42,7 @@ class RentViewSet(viewsets.ModelViewSet):
         serializer.save(editor=self.request.user, edited=datetime.today())
 
     def destroy(self, request, *args, **kwargs):
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         try:
             instance = self.get_object()
             instance.get_book().return_book()

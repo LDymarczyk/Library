@@ -24,6 +24,11 @@ class Rent(models.Model):
     def get_book(self):
         return self.book
 
+    def calculate_payment(self):
+        current_day = date.today()
+        days_between = (current_day - self.end_date).days
+        return days_between * 2
+
     def pay_for_late(self, money):
         self.cost -= money
         if self.cost <= 0.0:
