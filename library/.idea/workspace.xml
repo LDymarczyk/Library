@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="61bca471-3bbd-4d6f-87b1-3fc610e085da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/views/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/views/book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/views/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/views/library.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +14,7 @@
     <session id="251582802">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.14" value="1" />
@@ -57,7 +55,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/books/views/author.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="570">
               <caret line="38" column="74" lean-forward="true" selection-start-line="38" selection-start-column="74" selection-end-line="38" selection-end-column="74" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -582,7 +580,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/books/views/author.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="570">
           <caret line="38" column="74" lean-forward="true" selection-start-line="38" selection-start-column="74" selection-end-line="38" selection-end-column="74" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
