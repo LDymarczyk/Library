@@ -17,6 +17,13 @@ class LibraryPermissionTest(APITestCase):
                                                password='pass1234',
                                                PESEL=12344678901)
 
+        self.user2 = Reader.objects.create_user(username='alaniemakota',
+                                                first_name="Ala",
+                                                last_name="NieMaKota",
+                                                email='email@email.com',
+                                                password='pass1234',
+                                                PESEL=12344678901)
+
         self.library_attrs = {"name": "aabb",
                               "address": "aa",
                               "phone": "123456789",
@@ -44,13 +51,15 @@ class LibraryPermissionTest(APITestCase):
 
     def test_library_perform_update_method(self):
         client = APIClient()
-        client.force_authenticate(self.user)
+        client.force_authenticate(self.user2)
         library_name = "SoLibrary"
         response_update_library = client.patch(self.library_detail_url, {"name": library_name}, format='json')
         self.assertEqual(response_update_library.status_code, 200)
+        self.assertTrue(Library.objects.filter(name=library_name, editor=self.user2).exists())
 
     def test_library_perform_update_method_with_anonymous(self):
         client = APIClient()
         library_name = "SoLibrary"
         response_update_library = client.patch(self.library_detail_url, {"name": library_name}, format='json')
         self.assertEqual(response_update_library.status_code, 403)
+        self.assertFalse(Library.objects.filter(name=library_name).exists())

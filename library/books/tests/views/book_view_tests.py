@@ -16,6 +16,13 @@ class BookPermissionTest(APITestCase):
                                                password='pass1234',
                                                PESEL=12344678901)
 
+        self.user2 = Reader.objects.create_user(username='alaniemakota',
+                                                first_name="Ala",
+                                                last_name="NieMaKota",
+                                                email='email@email.com',
+                                                password='pass1234',
+                                                PESEL=12344678901)
+
         self.author_attrs = {'first_name': 'Adam',
                              'last_name': 'Kowalski',
                              'birth_year': 1800,
@@ -42,29 +49,30 @@ class BookPermissionTest(APITestCase):
     def test_book_perform_create_method(self):
         client = APIClient()
         client.force_authenticate(self.superuser)
-        self.book_attrs['author']=self.author.pk
+        self.book_attrs['author'] = self.author.pk
         response_create_book = client.post(self.book_list_url, self.book_attrs, format='json')
         self.assertEqual(response_create_book.status_code, 201)
         self.assertTrue(Book.objects.filter(title='Tytuł tom 1', creator=self.superuser).exists())
 
     def test_book_perform_create_method_with_anonymous(self):
         client = APIClient()
-        self.book_attrs['author']=self.author.pk
+        self.book_attrs['author'] = self.author.pk
+        self.book_attrs['title'] = 'test title'
         response_create_book = client.post(self.book_list_url, self.book_attrs, format='json')
         self.assertEqual(response_create_book.status_code, 403)
-        self.assertFalse(Book.objects.filter(title='Tytuł tom 1', creator=self.user).exists())
+        self.assertFalse(Book.objects.filter(title='test title').exists())
 
     def test_book_perform_update_method(self):
         client = APIClient()
-        client.force_authenticate(self.superuser)
-        book_title='Tytuł tom 2'
-        response_update_book = client.patch(self.book_detail_url, {'title': book_title},format='json')
+        client.force_authenticate(self.user2)
+        book_title = 'Tytuł tom 2'
+        response_update_book = client.patch(self.book_detail_url, {'title': book_title}, format='json')
         self.assertEqual(response_update_book.status_code, 200)
+        self.assertTrue(Book.objects.filter(title=book_title, editor=self.user2).exists())
 
     def test_book_perform_update_method_with_anonymous(self):
         client = APIClient()
-        book_title='Tytuł tom 2'
-        response_update_book = client.patch(self.book_detail_url, {'title': book_title},format='json')
+        book_title = 'Tytuł tom 2'
+        response_update_book = client.patch(self.book_detail_url, {'title': book_title}, format='json')
         self.assertEqual(response_update_book.status_code, 403)
-
-
+        self.assertFalse(Book.objects.filter(title=book_title).exists())

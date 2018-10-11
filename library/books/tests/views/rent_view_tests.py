@@ -17,6 +17,13 @@ class RentPermissionTest(APITestCase):
                                                password='pass1234',
                                                PESEL=12344678901)
 
+        self.user2 = Reader.objects.create_user(username='alaniemakota',
+                                                first_name="Ala",
+                                                last_name="NieMaKota",
+                                                email='email@email.com',
+                                                password='pass1234',
+                                                PESEL=12344678901)
+
         self.author_attrs = {'first_name': 'Adam',
                              'last_name': 'Kowalski',
                              'birth_year': 1800,
@@ -60,13 +67,13 @@ class RentPermissionTest(APITestCase):
 
     def test_rent_perform_update_method(self):
         client = APIClient()
-        client.force_authenticate(self.user)
+        client.force_authenticate(self.user2)
         client.post(self.rent_list_url, self.rent_attrs, format='json')
         rent_detail_url = '/rents/{}/'.format(Rent.objects.all()[0].pk)
         rent_end_date = date(2019, 1, 1)
         response_update_rent = client.patch(rent_detail_url, {'end_date': rent_end_date}, format='json')
         self.assertEqual(response_update_rent.status_code, 200)
-        self.assertTrue(Rent.objects.filter(start_date=date(2018, 10, 20), end_date=rent_end_date).exists())
+        self.assertTrue(Rent.objects.filter(editor=self.user2, end_date=rent_end_date).exists())
 
     def test_rent_perform_update_method_with_anonymous(self):
         client = APIClient()
