@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from datetime import date, datetime, timedelta
 from rest_framework.response import Response
 from django.http import Http404
+from rest_framework.decorators import action
 
 
 class RentViewSet(viewsets.ModelViewSet):
@@ -57,3 +58,14 @@ class RentViewSet(viewsets.ModelViewSet):
     def perform_destroy(self, instance):
 
         pass
+
+    @action(methods=['delete'], detail=True)
+    def regulate_payment(self, request, pk=None):
+        import pdb; pdb.set_trace()
+        instance = self.get_object()
+        if instance.late and not instance.regulated_payment:
+            instance.cost = 0
+            instance.regulated_payment = True
+            instance.status = False
+        pass
+
