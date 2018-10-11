@@ -13,9 +13,9 @@ class Rent(models.Model):
     end_date = models.DateField(null=True, blank=True)
     reader = models.ForeignKey(Reader,related_name='rent_reader', on_delete=models.PROTECT)
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='book_to_rent')
-    status = models.BooleanField(null=True, blank=True)
-    late = models.BooleanField(null=True, blank=True)
-    regulated_payment = models.BooleanField(null=True, blank=True)
+    status = models.NullBooleanField(default=True)
+    late = models.NullBooleanField(null=True, blank=True)
+    regulated_payment = models.NullBooleanField(default=False)
     cost = models.FloatField(null=True, blank=True)
 
     def custom_id(self):
@@ -43,6 +43,7 @@ class Rent(models.Model):
         else:
             self.late = True
             self.regulated_payment = False
+            self.calculate_payment()
 
     def make_rent(self):
         self.status = True

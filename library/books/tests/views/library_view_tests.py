@@ -63,3 +63,14 @@ class LibraryPermissionTest(APITestCase):
         response_update_library = client.patch(self.library_detail_url, {"name": library_name}, format='json')
         self.assertEqual(response_update_library.status_code, 403)
         self.assertFalse(Library.objects.filter(name=library_name).exists())
+
+    def test_library_perform_destroy_method(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_destroy_library = client.delete(self.library_detail_url)
+        self.assertEqual(response_destroy_library.status_code, 204)
+
+    def test_library_perform_destroy_method_for_anonymous(self):
+        client = APIClient()
+        response_destroy_library = client.delete(self.library_detail_url)
+        self.assertEqual(response_destroy_library.status_code, 403)

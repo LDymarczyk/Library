@@ -112,3 +112,14 @@ class BookPermissionTest(APITestCase):
         serializer = BookSerializer(queryset, many=True)
         self.assertEqual(len(response_available_books.data), len(queryset))
         self.assertEqual(response_available_books.data, serializer.data)
+
+    def test_book_perform_destroy_method(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_destroy_book = client.delete(self.book_detail_url)
+        self.assertEqual(response_destroy_book.status_code, 204)
+
+    def test_book_perform_destroy_method_for_anonymous(self):
+        client = APIClient()
+        response_destroy_book = client.delete(self.book_detail_url)
+        self.assertEqual(response_destroy_book.status_code, 403)
