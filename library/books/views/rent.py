@@ -42,13 +42,14 @@ class RentViewSet(viewsets.ModelViewSet):
         serializer.save(editor=self.request.user, edited=datetime.today())
 
     def destroy(self, request, *args, **kwargs):
-        # import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         try:
             instance = self.get_object()
-            if instance.return_book():
-                instance.get_book().return_book()
-                instance.get_book().save()
-            self.perform_destroy(instance)
+            instance.return_book()
+            instance.save()
+            instance.get_book().return_book()
+            instance.get_book().save()
+            #self.perform_destroy(instance)
         except Http404:
             pass
         return Response(status=status.HTTP_204_NO_CONTENT)

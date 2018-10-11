@@ -38,7 +38,8 @@ class Rent(models.Model):
 
     def return_book(self):
         today = date.today()
-        if (self.end_date <= today) or self.regulated_payment:
+        #import pdb; pdb.set_trace()
+        if (self.end_date >= today) or self.regulated_payment:
             self.status = False
         else:
             self.late = True
