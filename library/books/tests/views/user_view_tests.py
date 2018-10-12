@@ -68,6 +68,7 @@ class UserPermissionTest(APITestCase):
         self.rent2 = Rent.objects.create(**self.rent2_attrs)
 
         self.user2_rents_url='/users/{}/user_rents/'.format(self.user2.pk)
+        self.user2_currently_rented = '/users/{}/currently_rented/'.format(self.user2.pk)
 
     def test_user_action_user_rents(self):
         client = APIClient()
@@ -79,4 +80,15 @@ class UserPermissionTest(APITestCase):
         self.assertEqual(len(response_user_rents.data), len(queryset))
         queryset = serializer(queryset, many=True)
         self.assertEqual(response_user_rents.data, queryset.data)
+
+    def test_user_action_currently_rented(self):
+        client = APIClient()
+        client.force_authenticate(self.user2)
+        response_currently_rented = client.get(self.user2_currently_rented)
+        self.assertEqual(response_currently_rented.status_code, 200)
+        queryset = Rent.objects.filter(reader=self.user2, status=True)
+        serializer = RentSerializer
+        self.assertEqual(len(response_currently_rented.data), len(queryset))
+        queryset = serializer(queryset, many=True)
+        self.assertEqual(response_currently_rented.data, queryset.data)
 
