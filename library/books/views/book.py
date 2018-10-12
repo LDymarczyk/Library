@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from ..models import Book, Rent
 from ..serializers.book import BookSerializer
+from ..serializers.rent import RentSerializer
 from rest_framework import filters
 from django_filters import rest_framework as dfilters
 from rest_framework.decorators import action
@@ -45,8 +46,9 @@ class BookViewSet(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True)
     def history(self, request, pk=None):
         rents = Rent.objects.all()
-        rents = [rent for rent in rents if rent.book.pk == pk]
-        serializer = self.get_serializer_class()
+        #import pdb; pdb.set_trace()
+        rents = [rent for rent in rents if str(rent.book.pk) == pk]
+        serializer = RentSerializer
         data = serializer(rents, many=True, context={"request": request}).data
         return Response(data)
 
