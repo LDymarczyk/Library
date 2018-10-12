@@ -66,3 +66,12 @@ class RentViewSet(viewsets.ModelViewSet):
             instance.status = False
             instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(method=['get'], detail=False)
+    def current_rents(self, request):
+        rents = Rent.objects.all()
+        rents = [rent for rent in rents if rent.status]
+        serializer = self.get_serializer_class()
+        data = serializer(rents, many=True, context={request:'request'}).data
+        return Response(data)
+
