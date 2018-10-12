@@ -64,8 +64,11 @@ class UserPermissionTest(APITestCase):
         self.rent5_attrs = {'reader': self.user,
                             'book': self.book}
 
-        self.rent = Rent.objects.create(**self.rent_attrs)
-        self.rent2 = Rent.objects.create(**self.rent2_attrs)
+        Rent.objects.create(**self.rent_attrs)
+        Rent.objects.create(**self.rent2_attrs)
+        Rent.objects.create(**self.rent3_attrs)
+        Rent.objects.create(**self.rent4_attrs)
+        Rent.objects.create(**self.rent5_attrs)
 
         self.user2_rents_url='/users/{}/user_rents/'.format(self.user2.pk)
         self.user2_currently_rented = '/users/{}/currently_rented/'.format(self.user2.pk)
