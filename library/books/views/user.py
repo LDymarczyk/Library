@@ -17,8 +17,8 @@ class UserViewSet(viewsets.ModelViewSet):
     search_fields = ('PESEL', 'first_name', 'last_name')
     ordering_fields = ('first_name', 'last_name')
 
-    @action(method=['get'], detail=True)
-    def user_rent(self, request, pk=None):
+    @action(methods=['get'], detail=True)
+    def user_rents(self, request, pk=None):
         rents = Rent.objects.all()
         rents = [rent for rent in rents if rent.reader == pk]
         serializer = self.get_serializer_class()

@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models.book import Book
+from ..models import Book, Rent
 from ..serializers.book import BookSerializer
 from rest_framework import filters
 from django_filters import rest_framework as dfilters
@@ -36,10 +36,18 @@ class BookViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def show_available_books(self, request):
-        books = list(Book.objects.all())
+        books = Book.objects.all()
         books = [book for book in books if book.status]
         serializer = self.get_serializer_class()
         data = serializer(books, many=True, context={"request": request}).data
+        return Response(data)
+
+    @action(methods=['get'], detail=True)
+    def history(self, request, pk=None):
+        rents = Rent.objects.all()
+        rents = [rent for rent in rents if rent.book.pk == pk]
+        serializer = self.get_serializer_class()
+        data = serializer(rents, many=True, context={"request": request}).data
         return Response(data)
 
 
