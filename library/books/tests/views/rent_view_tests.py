@@ -1,6 +1,7 @@
 from rest_framework.test import APIClient, APITestCase
 from ...models import Author, Reader, Book, Rent
 from datetime import date
+from ...serializers.rent import RentSerializer
 
 
 class RentPermissionTest(APITestCase):
@@ -61,6 +62,8 @@ class RentPermissionTest(APITestCase):
         self.rent_detail_url = '/rents/{}/'.format(self.rent.pk)
         self.rent2_detail_url = '/rents/{}/'.format(self.rent2.pk)
         self.rent2_regulate_payment_url = '/rents/{}/regulate_payment/'.format(self.rent2.pk)
+        self.rent_current_rents = '/rents/current_rents/'
+        self.rent_current_user_rents = '/rents/current_user_rents/'
 
     def test_rent_perform_create_method(self):
         client = APIClient()
@@ -135,3 +138,27 @@ class RentPermissionTest(APITestCase):
         self.assertTrue(Rent.objects.get(pk=self.rent2.pk).regulated_payment)
         self.assertFalse(Rent.objects.get(pk=self.rent2.pk).status)
         self.assertTrue(Rent.objects.get(pk=self.rent2.pk).late)
+
+    def test_rent_action_current_rents(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_current_rents = client.get(self.rent_current_rents)
+        self.assertEqual(response_current_rents.status_code, 200)
+        queryset = Rent.objects.filter(status=True)
+        serializer = RentSerializer
+        self.assertEqual(len(response_current_rents.data), len(queryset))
+        queryset = serializer(queryset, many=True)
+        self.assertEqual(response_current_rents.data, queryset.data)
+
+    def test_rent_action_current_user_rents(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_current_user_rents = client.get(self.rent_current_user_rents)
+        self.assertEqual(response_current_user_rents.status_code, 200)
+        queryset = Rent.objects.filter(reader=self.user)
+        serializer = RentSerializer
+        self.assertEqual(len(response_current_user_rents.data), len(queryset))
+        queryset = serializer(queryset, many=True)
+        self.assertEqual(response_current_user_rents.data, queryset.data)
+
+

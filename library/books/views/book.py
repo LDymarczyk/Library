@@ -46,7 +46,6 @@ class BookViewSet(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True)
     def history(self, request, pk=None):
         rents = Rent.objects.all()
-        #import pdb; pdb.set_trace()
         rents = [rent for rent in rents if str(rent.book.pk) == pk]
         serializer = RentSerializer
         data = serializer(rents, many=True, context={"request": request}).data
