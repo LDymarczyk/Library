@@ -1,7 +1,8 @@
 from rest_framework.test import APIClient, APITestCase
 from rest_framework.renderers import JSONRenderer
-from ...models import Author, Reader, Book
+from ...models import Author, Reader, Book, Rent
 from ...serializers.book import BookSerializer
+from ...serializers.rent import RentSerializer
 
 
 class BookPermissionTest(APITestCase):
@@ -72,6 +73,19 @@ class BookPermissionTest(APITestCase):
         self.book_list_url = '/books/'
         self.book_detail_url = '/books/{}/'.format(self.book.pk)
         self.book_available_action_url = '/books/show_available_books/'
+        self.book_history_url = '/books/{}/history/'.format(self.book2.pk)
+
+        self.rent1 = Rent.objects.create(reader=self.user,
+                                         book=self.book3)
+
+        self.rent2 = Rent.objects.create(reader=self.user,
+                                         book=self.book2)
+
+        self.rent3 = Rent.objects.create(reader=self.user,
+                                         book=self.book2)
+
+        self.rent4 = Rent.objects.create(reader=self.user2,
+                                         book=self.book3)
 
     def test_book_perform_create_method(self):
         client = APIClient()
@@ -123,3 +137,13 @@ class BookPermissionTest(APITestCase):
         client = APIClient()
         response_destroy_book = client.delete(self.book_detail_url)
         self.assertEqual(response_destroy_book.status_code, 403)
+
+    def test_book_action_history(self):
+        client = APIClient()
+        client.force_authenticate(self.user)
+        response_history = client.get(self.book_history_url)
+        self.assertEqual(response_history.status_code, 200)
+        queryset = Rent.objects.filter(book=self.book2)
+        serializer = RentSerializer
+        self.assertEqual(len(response_history.data), len(queryset))
+        self.assertEqual(response_history.data, serializer(queryset, many=True).data)
