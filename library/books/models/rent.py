@@ -18,6 +18,7 @@ class Rent(models.Model):
     regulated_payment = models.NullBooleanField(default=False)
     cost = models.FloatField(null=True, blank=True)
 
+    @property
     def custom_id(self):
         self.id += 10000
 
@@ -39,7 +40,7 @@ class Rent(models.Model):
     def return_book(self):
         today = date.today()
         #import pdb; pdb.set_trace()
-        if (self.end_date >= today):
+        if self.end_date >= today:
             self.status = False
         else:
             self.late = True

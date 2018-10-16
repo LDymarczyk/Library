@@ -9,6 +9,7 @@ from datetime import date, datetime, timedelta
 from rest_framework.response import Response
 from django.http import Http404
 from rest_framework.decorators import action
+from django.db import transaction
 
 
 class RentViewSet(viewsets.ModelViewSet):
@@ -46,6 +47,7 @@ class RentViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(editor=self.request.user, edited=datetime.today())
 
+    @transaction.atomic
     def destroy(self, request, *args, **kwargs):
         try:
             instance = self.get_object()

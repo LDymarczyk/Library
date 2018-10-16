@@ -5,10 +5,19 @@ from .user import Reader
 
 
 class Author(models.Model):
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, blank=True)
-    edited = models.DateTimeField(blank=True, null=True)
-    creator = models.ForeignKey('Reader', on_delete=models.SET_NULL, editable=False, null=True, blank=True)
-    editor = models.ForeignKey(Reader, related_name='author_editor', editable=False, on_delete=models.SET_NULL, null=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False, null=True,
+                                   blank=True)  # todo editable null blank do usuniecia
+    edited = models.DateTimeField(blank=True, null=True)  # todo dodac auto_add
+    creator = models.ForeignKey(Reader,
+                                on_delete=models.SET_NULL,
+                                editable=False,
+                                null=True,
+                                blank=True)
+    editor = models.ForeignKey('books.Reader',
+                               related_name='author_editor',
+                               editable=False,  # todo do sprawdzenia
+                               on_delete=models.SET_NULL,
+                               null=True)
     first_name = models.CharField(max_length=75)
     last_name = models.CharField(max_length=75)
     birth_year = models.IntegerField(null=True, blank=True)
@@ -35,4 +44,4 @@ class Author(models.Model):
         return self.last_name
 
     def get_full_name(self):
-        return self.first_name+" "+self.last_name
+        return self.first_name + " " + self.last_name

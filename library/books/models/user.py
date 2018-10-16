@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+#todo zmiana nazwy na MyUser aby byl bardziej ogolny plus typ czy reader czy pracownik
 class Reader(AbstractUser):
     PESEL = models.BigIntegerField(blank=True, null=True)
     telephone = models.IntegerField(blank=True, null=True)
