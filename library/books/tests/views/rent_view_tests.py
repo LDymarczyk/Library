@@ -57,6 +57,7 @@ class RentPermissionTest(APITestCase):
 
         self.rent = Rent.objects.create(**self.rent_attrs)
         self.rent2 = Rent.objects.create(**self.rent2_attrs)
+        self.rent3 = Rent.objects.create(**self.rent_attrs)
 
         self.rent_list_url = '/rents/'
         self.rent_detail_url = '/rents/{}/'.format(self.rent.pk)
@@ -97,6 +98,7 @@ class RentPermissionTest(APITestCase):
         response_update_rent = client.patch(rent_detail_url, {'end_date': rent_end_date}, format='json')
         self.assertEqual(response_update_rent.status_code, 200)
         self.assertTrue(Rent.objects.filter(editor=self.user2, end_date=rent_end_date).exists())
+
 
     def test_rent_perform_update_method_with_anonymous(self):
         client = APIClient()

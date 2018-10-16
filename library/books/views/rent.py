@@ -37,7 +37,11 @@ class RentViewSet(viewsets.ModelViewSet):
         else:
             end_date = self.request.data['end_date']
         book.rent_book()
+
         serializer.save(creator=self.request.user, end_date=end_date, start_date=start_date)
+        rent = serializer.instance
+        rent.custom_id()
+        rent.save()
 
     def perform_update(self, serializer):
         serializer.save(editor=self.request.user, edited=datetime.today())
