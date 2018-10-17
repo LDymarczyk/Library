@@ -27,5 +27,5 @@ class LibrarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Library
-        fields = ('address', 'phone', 'email', 'name', 'id', 'creator', 'created', 'editor', 'edited')
+        fields = ('address', 'phone', 'email', 'name', 'id', 'creator', 'created', 'editor', 'edited', 'count_books')
         read_only_fields = ('id', 'creator', 'created', 'editor', 'edited')

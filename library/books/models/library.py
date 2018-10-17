@@ -1,5 +1,5 @@
 from django.db import models
-from .user import Reader
+from . import Reader
 
 
 class Library(models.Model):
@@ -14,3 +14,13 @@ class Library(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    @property
+    def count_books(self):
+        books = self.books_library.all()
+        #import pdb; pdb.set_trace()
+        sum_books = 0
+        for book in books:
+            if book.library == self:
+                sum_books += book.amount
+        return sum_books

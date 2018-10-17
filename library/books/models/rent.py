@@ -54,3 +54,11 @@ class Rent(models.Model):
 
     class Meta:
         order_with_respect_to = 'reader'
+
+    # def save(self, *args, **kwargs):
+    #     #import pdb;pdb.set_trace()
+    #     #self.custom_id()
+    #     super().save()
+    #     #self.custom_id()
+    #     import pdb;
+    #     pdb.set_trace()

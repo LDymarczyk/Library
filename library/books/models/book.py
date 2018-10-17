@@ -39,7 +39,7 @@ class Book(models.Model):
     language = models.CharField(max_length=100)
     status = models.BooleanField()
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
-    library = models.ForeignKey(Library, on_delete=models.SET_NULL, null=True)
+    library = models.ForeignKey(Library,related_name='books_library', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return '{} {}'.format(self.title, self.id)
@@ -59,9 +59,3 @@ class Book(models.Model):
 
     def is_rented(self):
         return self.status
-
-
-
-
-
-
