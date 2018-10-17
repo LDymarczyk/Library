@@ -5,9 +5,9 @@ from .user import Reader
 
 
 class Author(models.Model):
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True,
-                                   blank=True)  # todo editable null blank do usuniecia
-    edited = models.DateTimeField(blank=True, null=True)  # todo dodac auto_add
+
+    created = models.DateTimeField(auto_now_add=True, editable=False)  # todo editable null blank do usuniecia
+    edited = models.DateTimeField(auto_now_add=True)  # todo dodac auto_add
     creator = models.ForeignKey(Reader,
                                 on_delete=models.SET_NULL,
                                 editable=False,
@@ -20,7 +20,7 @@ class Author(models.Model):
                                null=True)
     first_name = models.CharField(max_length=75)
     last_name = models.CharField(max_length=75)
-    birth_year = models.IntegerField(null=True, blank=True)
+    birth_year = models.IntegerField()
     death_year = models.IntegerField(null=True, blank=True)
 
     def __str__(self):

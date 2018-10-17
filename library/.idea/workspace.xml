@@ -3,12 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="61bca471-3bbd-4d6f-87b1-3fc610e085da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/models/book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/models/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/models/library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/models/rent.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/models/rent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/serializers/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/serializers/library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0002_auto_20180925_1029.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0003_auto_20180927_1323.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0004_auto_20180927_1330.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0005_auto_20181008_1148.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0006_auto_20181008_1242.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0007_auto_20181010_1014.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0008_remove_rent_library.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0009_auto_20181010_1445.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0010_auto_20181011_1236.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0011_auto_20181011_1238.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/0012_auto_20181011_1458.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/models/author.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/models/author.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,38 +46,38 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="224" />
-          <entry key="txt" value="2" />
+          <entry key="py" value="226" />
+          <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="224" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="226" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="128" />
           <entry key="dummy" value="45" />
-          <entry key="py" value="17389" />
+          <entry key="py" value="17492" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Python" value="17517" />
+          <entry key="Python" value="17620" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/models/library.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="298">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -77,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/models/book.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="313">
+              <caret line="41" column="11" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="11" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -89,8 +100,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/serializers/book.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="54" column="75" lean-forward="true" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,10 +112,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/books/serializers/library.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+            <state relative-caret-position="330">
+              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/books/models/author.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,7 +195,6 @@
         <option value="$PROJECT_DIR$/books/tests/views/rent_view_tests.py" />
         <option value="$PROJECT_DIR$/books/models/user.py" />
         <option value="$PROJECT_DIR$/books/models/__init__.py" />
-        <option value="$PROJECT_DIR$/books/models/author.py" />
         <option value="$PROJECT_DIR$/books/serializers/author.py" />
         <option value="$PROJECT_DIR$/books/serializers/rent.py" />
         <option value="$PROJECT_DIR$/books/views/book.py" />
@@ -168,8 +202,10 @@
         <option value="$PROJECT_DIR$/books/models/rent.py" />
         <option value="$PROJECT_DIR$/books/serializers/library.py" />
         <option value="$PROJECT_DIR$/books/models/book.py" />
-        <option value="$PROJECT_DIR$/books/serializers/book.py" />
         <option value="$PROJECT_DIR$/books/models/library.py" />
+        <option value="$PROJECT_DIR$/books/serializers/book.py" />
+        <option value="$PROJECT_DIR$/library/settings.py" />
+        <option value="$PROJECT_DIR$/books/models/author.py" />
       </list>
     </option>
   </component>
@@ -201,20 +237,7 @@
             <path>
               <item name="library" type="b2602c69:ProjectViewProjectNode" />
               <item name="library" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="library" type="b2602c69:ProjectViewProjectNode" />
               <item name="library" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-              <item name="serializers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="library" type="b2602c69:ProjectViewProjectNode" />
-              <item name="library" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -282,7 +305,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.2822186" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.43066883" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32952693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -345,13 +368,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="97" column="57" selection-start-line="97" selection-start-column="57" selection-end-line="97" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -555,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/books/models/author.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/books/views/library.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -614,37 +623,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/books/serializers/library.py">
+    <entry file="file://$PROJECT_DIR$/books/models/library.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/books/serializers/book.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="54" column="75" lean-forward="true" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/books/models/book.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="298">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/books/models/library.py">
+    <entry file="file://$PROJECT_DIR$/books/models/book.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="313">
+          <caret line="41" column="11" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/books/serializers/book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/books/serializers/library.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/books/models/author.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
